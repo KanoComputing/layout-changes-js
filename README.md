@@ -26,7 +26,7 @@ bower install --save layout-changes
 
 ```html
 <!-- In your HTML file, add -->
-<script src="bower_components/layout-changes/dist/build.js></script>"
+<script src="app/bower_components/layout-changes/dist/build.js"></script>
 ```
 
 ```javascript
