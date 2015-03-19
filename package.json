@@ -1,0 +1,9 @@
+{
+  "name": "layout-changes",
+  "version": "0.0.0",
+  "description": "Util to watch a DOM element's tree for resizes or content changes",
+  "main": "lib/index.js",
+  "scripts": {},
+  "author": "Tancredi Trugenberger",
+  "license": "ISC"
+}
