@@ -14,7 +14,7 @@ npm install --save layout-changes
 ```javascript
 var layoutChanges = require('layout-changes');
 
-/ ..
+// ..
 ```
 
 **With bower:**
@@ -32,7 +32,7 @@ bower install --save layout-changes
 ```javascript
 var layoutChanges = window.LayoutChanges
 
-/ ..
+// ..
 ```
 
 #### Usage
