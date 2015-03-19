@@ -1,0 +1,12 @@
+{
+  "name": "layout-changes",
+  "version": "0.0.1",
+  "main": "dist/build.js",
+  "ignore": [
+    ".package.json",
+    "node_modules",
+    "lib"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}

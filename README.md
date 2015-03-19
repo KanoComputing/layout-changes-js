@@ -4,10 +4,35 @@
 
 #### Install
 
-From npm:
+**With npm:**
 
 ```bash
+# On your console, run
 npm install --save layout-changes
+```
+
+```javascript
+var layoutChanges = require('layout-changes');
+
+/ ..
+```
+
+**With bower:**
+
+```bash
+# On your console, run
+bower install --save layout-changes
+```
+
+```html
+<!-- In your HTML file, add -->
+<script src="bower_components/layout-changes/dist/build.js></script>"
+```
+
+```javascript
+var layoutChanges = window.LayoutChanges
+
+/ ..
 ```
 
 #### Usage

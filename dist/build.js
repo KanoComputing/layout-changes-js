@@ -1,3 +1,4 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var Loop = require('game-loop'),
     loop = new Loop(),
     elementData = require('./util/element-data');
@@ -143,3 +144,103 @@ if (window) {
 if (module) {
     module.exports = lib;
 }
+},{"./util/element-data":2,"game-loop":3}],2:[function(require,module,exports){
+var cache = [0],
+    expando = 'data' + new Date();
+
+/*
+ * Retrieve / Assign key-value pair to element
+ * @param {HTMLNode} element
+ * @param {String} key
+ * @param {Mixed*} value
+ * @return {void}
+ */
+module.exports = function (element, key, value) {
+    var cacheIndex = element[expando],
+        nextCacheIndex = cache.length;
+
+    if (!cacheIndex) {
+        cacheIndex = element[expando] = nextCacheIndex;
+        cache[cacheIndex] = {};
+    }
+
+    if (value) { // set
+        cache[cacheIndex][key] = value;
+        return value;
+    } else { // get
+        return cache[cacheIndex][key];
+    }
+};
+},{}],3:[function(require,module,exports){
+
+var requestAnimFrame = require('./utils/requestAnimFrame');
+
+var Loop = function () {
+  this.callbacks = [];
+  this.playing = false;
+  this.fps = 0;
+  this.frame = 0;
+};
+
+Loop.prototype.play = function () {
+  this.playing = true;
+  this.next();
+};
+
+Loop.prototype.stop = function () {
+  this.playing = false;
+};
+
+Loop.prototype.use = function (callback) {
+  this.callbacks.push(callback);
+};
+
+Loop.prototype.next = function () {
+  if (this.playing) {
+    var self = this;
+
+    this.getFPS();
+
+    for (var i = 0; i < this.callbacks.length; i += 1) {
+      this.callbacks[i]();
+    }
+
+    this.frame+= 1;
+
+    requestAnimFrame(function () {
+      self.next();
+    });
+  }
+};
+
+Loop.prototype.getFPS = function () {
+  var delta;
+
+  if (!this.lastUpdate) {
+    this.lastUpdate = new Date().getTime();
+  }
+
+  delta = (new Date().getTime() - this.lastUpdate) / 1000;
+  this.lastUpdate = new Date().getTime();
+  this.fps = 1 / delta;
+};
+
+module.exports = Loop;
+
+},{"./utils/requestAnimFrame":4}],4:[function(require,module,exports){
+
+var polyfill = function (callback) {
+  setTimeout(callback, 1000 / 60);
+};
+
+module.exports =
+  (window) ? (
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    polyfill
+  ) : polyfill;
+
+},{}]},{},[1]);

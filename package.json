@@ -1,9 +1,17 @@
 {
   "name": "layout-changes",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Util to watch a DOM element's tree for resizes or content changes",
   "main": "lib/index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "browserify lib/index.js -o dist/build.js"
+  },
   "author": "Tancredi Trugenberger",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "game-loop": "0.0.1"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.3"
+  }
 }
